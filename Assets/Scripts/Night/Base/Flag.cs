@@ -1,43 +1,43 @@
 namespace Flag {
     /// <summary>
-    /// ÎïÆ·ÀàĞÍ
+    /// ç‰©å“ç±»å‹
     /// </summary>
     public enum ItemType { 
         /// <summary>
-        /// Ä¬ÈÏ
+        /// é»˜è®¤
         /// </summary>
         Default = -1,
         /// <summary>
-        /// ÎäÆ÷
+        /// æ­¦å™¨
         /// </summary>
         Weapon = 0,
     }
     /// <summary>
-    /// ×°±¸ÀàĞÍ
+    /// è£…å¤‡ç±»å‹
     /// </summary>
     public enum Equipment { 
         /// <summary>
-        /// Ä¬ÈÏ
+        /// é»˜è®¤
         /// </summary>
         None = -1,
         /// <summary>
-        /// µ¶
+        /// åˆ€
         /// </summary>
         Knife = 0,
         /// <summary>
-        /// ½£
+        /// å‰‘
         /// </summary>
         Sword = 1,
         /// <summary>
-        /// Ã¬
+        /// çŸ›
         /// </summary>
         Spear = 2,
         /// <summary>
-        /// ¶Ü
+        /// ç›¾
         /// </summary>
         Shield = 3,
         /// <summary>
-        /// îø¼×
+        /// é“ ç”²
         /// </summary>
         Armour = 4
     }

@@ -1,7 +1,7 @@
 using UnityEngine;
 public class NightMapObject : MonoBehaviour {
     /// <summary>
-    /// ÒÔ[r, c]µÄĞÎÊ½´¢´æ
+    /// ä»¥[r, c]çš„å½¢å¼å‚¨å­˜
     /// </summary>
     public Vector2Int Position { get; set; }
     [SerializeField] private NightMapStateEnum m_state;

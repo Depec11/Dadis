@@ -2,54 +2,54 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// ÎïÆ·£¬¼Ì³Ğ×ÔÎïÌå
+/// ç‰©å“ï¼Œç»§æ‰¿è‡ªç‰©ä½“
 /// </summary>
 public abstract class Item { 
     /// <summary>
-    /// ÊıÁ¿
+    /// æ•°é‡
     /// </summary>
     public int count = 1;
     /// <summary>
-    /// µÈ¼¶
+    /// ç­‰çº§
     /// </summary>
     public int level = 1;
     /// <summary>
-    /// ÀàĞÍ
+    /// ç±»å‹
     /// </summary>
     public Flag.ItemType type = Flag.ItemType.Default;
     /// <summary>
-    /// ÊÇ·ñ¿ÉÒÔ±»ÏûºÄÄÍ¾Ã
+    /// æ˜¯å¦å¯ä»¥è¢«æ¶ˆè€—è€ä¹…
     /// </summary>
     public bool unbrokenable = false;
     /// <summary>
-    /// ÄÍ¾Ã£¬-1ÎªÕıÎŞÇî
+    /// è€ä¹…ï¼Œ-1ä¸ºæ­£æ— ç©·
     /// </summary>
     public int duration = -1;
     /// <summary>
-    /// ×î´ó¶ÑµşÊı£¬-1ÎªÕıÎŞÇî
+    /// æœ€å¤§å †å æ•°ï¼Œ-1ä¸ºæ­£æ— ç©·
     /// </summary>
     private int m_maxCount;
     /// <summary>
-    /// Ãû³Æ
+    /// åç§°
     /// </summary>
     protected string m_name = "DefaultItem";
     /// <summary>
-    /// Ãû³Æ
+    /// åç§°
     /// </summary>
     public string Name => m_name;
     /// <summary>
-    /// ×î´ó¶ÑµşÊı
+    /// æœ€å¤§å †å æ•°
     /// </summary>
     public int MaxCount => m_maxCount;
     /// <summary>
-    /// ³õÊ¼»¯
+    /// åˆå§‹åŒ–
     /// </summary>
-    /// <param name="l">µÈ¼¶</param>
-    /// <param name="c">ÊıÁ¿</param>
-    /// <param name="d">ÄÍ¾Ã</param>
-    /// <param name="mc">×î´ó¶ÑµşÊı</param>
-    /// <param name="t">ÀàĞÍ</param>
-    /// <param name="n">Ãû³Æ</param>
+    /// <param name="l">ç­‰çº§</param>
+    /// <param name="c">æ•°é‡</param>
+    /// <param name="d">è€ä¹…</param>
+    /// <param name="mc">æœ€å¤§å †å æ•°</param>
+    /// <param name="t">ç±»å‹</param>
+    /// <param name="n">åç§°</param>
     public Item(int l, int c, int d, int mc, Flag.ItemType t = Flag.ItemType.Default, string n = "DefaultItem") {
         level = l;
         count = c;
@@ -60,86 +60,86 @@ public abstract class Item {
         if (duration == -1) unbrokenable = true;
     }
     /// <summary>
-    /// ÖØÔØµÈÓÚÅĞ¶Ï
+    /// é‡è½½ç­‰äºåˆ¤æ–­
     /// </summary>
-    /// <param name="i1">ÎïÆ·1</param>
-    /// <param name="i2">ÎïÆ·2</param>
-    /// <returns>ÊÇ·ñÏàµÈ</returns>
+    /// <param name="i1">ç‰©å“1</param>
+    /// <param name="i2">ç‰©å“2</param>
+    /// <returns>æ˜¯å¦ç›¸ç­‰</returns>
     public static bool operator ==(Item i1, Item i2) {
         if (ReferenceEquals(i1, null) && ReferenceEquals(i2, null)) return true;
         if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null)) return false;
         return i1.Name == i2.Name && i1.level == i2.level && i1.duration == i2.duration;
     }
     /// <summary>
-    /// ÖØÔØ²»µÈÓÚÅĞ¶Ï
+    /// é‡è½½ä¸ç­‰äºåˆ¤æ–­
     /// </summary>
-    /// <param name="i1">ÎïÆ·1</param>
-    /// <param name="i2">ÎïÆ·2</param>
-    /// <returns>ÊÇ·ñ²»ÏàµÈ</returns>
+    /// <param name="i1">ç‰©å“1</param>
+    /// <param name="i2">ç‰©å“2</param>
+    /// <returns>æ˜¯å¦ä¸ç›¸ç­‰</returns>
     public static bool operator !=(Item i1, Item i2) {
         return !(i1 == i2);
     }
     /// <summary>
-    /// ÖØÔØÅĞ¶ÏÊÇ·ñÏàµÈ
+    /// é‡è½½åˆ¤æ–­æ˜¯å¦ç›¸ç­‰
     /// </summary>
-    /// <param name="obj">±È½Ï¶ÔÏó</param>
-    /// <returns>ÊÇ·ñÏàµÈ</returns>
+    /// <param name="obj">æ¯”è¾ƒå¯¹è±¡</param>
+    /// <returns>æ˜¯å¦ç›¸ç­‰</returns>
     public override bool Equals(object obj) {
         return this == (Item)obj;
     }
     /// <summary>
-    /// ÖØÔØ»ñÈ¡¹şÏ£Öµ
+    /// é‡è½½è·å–å“ˆå¸Œå€¼
     /// </summary>
-    /// <returns>¹şÏ£Öµ</returns>
+    /// <returns>å“ˆå¸Œå€¼</returns>
     public override int GetHashCode() {
         return base.GetHashCode();
     }
     /// <summary>
-    /// ÖØÔØ×ªÎª×Ö·û´®
+    /// é‡è½½è½¬ä¸ºå­—ç¬¦ä¸²
     /// </summary>
-    /// <returns>×ª»¯ºóµÄ×Ö·û´®</returns>
+    /// <returns>è½¬åŒ–åçš„å­—ç¬¦ä¸²</returns>
     public override string ToString() {
         return m_name;
     }
     /// <summary>
-    /// ÉèÖÃÍ¼Æ¬
+    /// è®¾ç½®å›¾ç‰‡
     /// </summary>
-    /// <param name="picture">Í¼Æ¬äÖÈ¾Æ÷µÄÍ¼Æ¬ÈİÆ÷</param>
+    /// <param name="picture">å›¾ç‰‡æ¸²æŸ“å™¨çš„å›¾ç‰‡å®¹å™¨</param>
     public abstract Sprite Picture();
     /// <summary>
-    /// »ñÈ¡ÃèÊö
+    /// è·å–æè¿°
     /// </summary>
-    /// <returns>ÃèÊö</returns>
+    /// <returns>æè¿°</returns>
     public virtual string GetDesc() {
         return "";
     }
     /// <summary>
-    /// ÅĞ¶ÏÊÇ·ñÄÜÔÚ±³°üUIÖĞÏÔÊ¾½»»¥°´Å¥
+    /// åˆ¤æ–­æ˜¯å¦èƒ½åœ¨èƒŒåŒ…UIä¸­æ˜¾ç¤ºäº¤äº’æŒ‰é’®
     /// </summary>
-    /// <returns>ÄÜ·ñÏÔÊ¾</returns>
+    /// <returns>èƒ½å¦æ˜¾ç¤º</returns>
     public virtual bool CanShowInteractiveButton() {
         return false;
     }
 #if DEBUG
     /// <summary>
-    /// ¸´ÖÆÎïÆ·
+    /// å¤åˆ¶ç‰©å“
     /// </summary>
-    /// <param name="item">ÎïÆ·</param>
-    /// <returns>¸´ÖÆºóµÄÎïÆ·</returns>
+    /// <param name="item">ç‰©å“</param>
+    /// <returns>å¤åˆ¶åçš„ç‰©å“</returns>
     public static Item Copy(Item item) { 
         Type type = item.GetType();
         return (Item)Activator.CreateInstance(type);
     }
 #endif
     /// <summary>
-    /// »ñÈ¡¿É½»»¥ÎÄ±¾
+    /// è·å–å¯äº¤äº’æ–‡æœ¬
     /// </summary>
-    /// <returns>¿É½»»¥ÎÄ±¾</returns>
+    /// <returns>å¯äº¤äº’æ–‡æœ¬</returns>
     public virtual string GetInteractiveText() {
         return "";
     }
     /// <summary>
-    /// Ïú»ÙÎïÆ·
+    /// é”€æ¯ç‰©å“
     /// </summary>
     public virtual void Dispose() { }
 }

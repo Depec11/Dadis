@@ -6,7 +6,7 @@ public class NightManager : SceneManager {
     public static NightManager Instance { get; private set; }
     [FormerlySerializedAs("mNightMapChanceSheet")] [FormerlySerializedAs("m_mapChanceSheet")] [SerializeField] private NightMapChanceSheet m_NightMapChanceSheet;
     /// <summary>
-    ///  [i, j]£¬iÊÇĞĞ£¬jÊÇÁĞ
+    ///  [i, j]ï¼Œiæ˜¯è¡Œï¼Œjæ˜¯åˆ—
     /// </summary>
     private NightMapStateEnum[,] m_map;
     private bool[,] m_shadow;
@@ -71,7 +71,7 @@ public class NightManager : SceneManager {
     }
     private GameObject InstantiateTile(GameObject go, int r, int c) {
         GameObject instance = Instantiate(go, m_mapTransform);
-        instance.transform.position = new Vector2(c, -r);   // Unity ºÍ ¼ÆËã»úÍ¼ĞÎÑ§µÄ×ø±êÏµ²»Ò»Ñù£¬:(
+        instance.transform.position = new Vector2(c, -r);   // Unity å’Œ è®¡ç®—æœºå›¾å½¢å­¦çš„åæ ‡ç³»ä¸ä¸€æ ·ï¼Œ:(
         instance.GetComponent<NightMapObject>().Position = new Vector2Int(r, c);
         return instance;
     }
