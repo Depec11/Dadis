@@ -71,7 +71,7 @@ public class NightManager : SceneManager {
     private void InstantiatePlayer(Vector2Int pos) {
         Player = InstantiateTile(m_playerPrefab, pos.x, pos.y);
     }
-    private void HandleMove() {
-        
+    private void HandleMove()  {
+        ;
     }
 }
