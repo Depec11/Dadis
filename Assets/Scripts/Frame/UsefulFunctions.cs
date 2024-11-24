@@ -1,5 +1,4 @@
 using UnityEngine;
-
 namespace Frame {
     public static class UsefulFunctions {
         public static void DestroyAllChildren(Transform parent) {
