@@ -333,3 +333,4 @@ MonoBehaviour:
   m_propPrefab: {fileID: 4801005417558662996, guid: 5b9c9563a239cd24e8752ef60b8f9b0b, type: 3}
   m_pathPrefab: {fileID: 4801005417558662996, guid: 3e5156cea91f52d4297951d92e0e1021, type: 3}
   m_monsterPrefab: {fileID: 4801005417558662996, guid: 28db30df71a6f6747a092e3ab982d19e, type: 3}
+  m_playerPrefab: {fileID: 4801005417558662996, guid: c7fad710e1669e14c940eb4b5b5ba171, type: 3}
