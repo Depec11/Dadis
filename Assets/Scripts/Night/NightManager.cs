@@ -23,6 +23,12 @@ public class NightManager : SceneManager {
         Instance = this;
         GenerateMap();
     }
+
+    public override void Load()
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void Update() {
         HandleMove();
         if (Input.GetMouseButtonUp(0)) {

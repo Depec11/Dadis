@@ -1,9 +1,13 @@
 # Dadis小组Game Jam
 ## 基础架构
-- 分为白天和黑天两个弱场景（即为Prefabs）
-- 两个弱场景在生成后从StreamingAssets中加载Json数据初始化场景，或者使用Global
-- 有一个全局主场景，目前只能用于跳转弱场景
+- 分为白天和黑天两个弱场景（即为Prefabs）。
+- 两个弱场景在生成后从StreamingAssets中加载Json数据初始化场景，或者使用Global。
+- 有一个全局主场景，目前只能用于跳转弱场景。
 ## 切记
-- 不要使用Text Mesh Pro，UI就用Lengacy
+- 不要使用Text Mesh Pro，UI就用Lengacy。
+- 白天场景的工作区域：Scripts/Day，Resources/Day。
+- 黑天场景的工作区域：Scripts/Night，Resources/Night。
+- 全局的工作空间在Scripts/下的非上述工作空间。
+- Scripts/Frame是Depec常用的扩展脚本。
 ## 计划
-- Depec 制作黑夜地图移动
+- Depec 制作黑夜地图移动。

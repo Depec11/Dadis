@@ -1,7 +1,6 @@
 // ENCODING WITH UTF-8
 
 using UnityEngine;
-using System.Threading.Tasks;
 using static UsefulFunctions;
 
 public class MainScene : MonoBehaviour {
@@ -17,21 +16,17 @@ public class MainScene : MonoBehaviour {
         GenerateNightScene();
     }
     /// <summary>
-    /// 生成白天场景，会摧毁其他场景
+    /// 同步生成白天场景，会摧毁其他场景
     /// </summary>
     public void GenerateDayScene() {
         DestroyAllChildren(transform);
         Instantiate(m_dayScenes, transform);
     }
     /// <summary>
-    /// 生成夜晚场景，会摧毁其他场景
+    /// 同步生成夜晚场景，会摧毁其他场景
     /// </summary>
     public void GenerateNightScene() {
         DestroyAllChildren(transform);
         Instantiate (m_nightScenes, transform);
-    }
-
-    public async Task PrepareSceneAsync() {
-        return;
     }
 }

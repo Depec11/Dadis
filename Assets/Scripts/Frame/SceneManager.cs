@@ -12,4 +12,6 @@ public abstract class SceneManager : MonoBehaviour {
         UITransform = GameObject.Find("Canvas").transform;
         Transform = transform;
     }
+
+    public abstract void Load();
 }
