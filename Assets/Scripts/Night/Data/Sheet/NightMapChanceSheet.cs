@@ -3,11 +3,11 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = ("Data/MapChanceSheet"), fileName = ("MapChanceSheet_"))]
 [Serializable] public class NightMapChanceSheet : ScriptableObject {
-    [Tooltip("�Թ���С�� ��Ҫ����N*N��N")][Range(5, 20)][SerializeField] private int m_mapCount;
-    [Tooltip("�������")][Range(0.1f, 0.9f)][SerializeField] private float m_chestChance;
-    [Tooltip("���߸���")][Range(0.1f, 0.9f)][SerializeField] private float m_propChance;
-    [Tooltip("ͨ·����")][Range(0.1f, 0.9f)][SerializeField] private float m_pathChance;
-    [Tooltip("�������")][Range(0.1f, 0.9f)][SerializeField] private float m_monsterChance;
+    [Tooltip("地图的大小 即为N*N中的N")][Range(5, 20)][SerializeField] private int m_mapCount;
+    [Tooltip("箱子的概率")][Range(0.1f, 0.9f)][SerializeField] private float m_chestChance;
+    [Tooltip("道具的概率")][Range(0.1f, 0.9f)][SerializeField] private float m_propChance;
+    [Tooltip("路径的概率")][Range(0.1f, 0.9f)][SerializeField] private float m_pathChance;
+    [Tooltip("怪兽的概率")][Range(0.1f, 0.9f)][SerializeField] private float m_monsterChance;
     public int MapCount => m_mapCount;
     public float ChestChance => m_chestChance;
     public float PropChance => m_propChance;
