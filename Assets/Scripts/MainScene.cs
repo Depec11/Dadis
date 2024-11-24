@@ -1,7 +1,7 @@
 // ENCODING WITH UTF-8
 
 using UnityEngine;
-using static UsefulFunctions;
+using static Frame.UsefulFunctions;
 
 public class MainScene : MonoBehaviour {
     /// <summary>

@@ -1,7 +1,7 @@
 using TMPro;
-using UI;
+using Frame.UI;
 using UnityEngine;
-namespace Event { 
+namespace Frame.Event { 
     /// <summary>
     /// 事件行为
     /// </summary>

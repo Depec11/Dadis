@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FunctionTemplates {
+namespace Frame {
     /// <summary>
     /// 参数为bool，返回值为void的委托
     /// </summary>

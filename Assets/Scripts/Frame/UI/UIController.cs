@@ -1,7 +1,5 @@
-using FunctionTemplates;
 using UnityEngine;
-
-namespace UI {
+namespace Frame.UI {
     /// <summary>
     /// UI控制器
     /// </summary>

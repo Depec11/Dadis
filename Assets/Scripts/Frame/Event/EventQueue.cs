@@ -1,8 +1,7 @@
-using FunctionTemplates;
 using System.Collections.Generic;
-using UI;
 using UnityEngine; 
-namespace Event { 
+using Frame.UI;
+namespace Frame.Event { 
     /// <summary>
     /// 事件信息
     /// </summary>

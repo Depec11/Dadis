@@ -1,9 +1,7 @@
-using FunctionTemplates;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-namespace UI {
+namespace Frame.UI {
     public enum DragType { 
         Self = 0x0,
         Parent = 0x1,

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-
-public class NightManager : SceneManager {
+public class NightManager : Frame.SceneManager {
     public static NightManager Instance { get; private set; }
     [FormerlySerializedAs("mNightMapChanceSheet")] [FormerlySerializedAs("m_mapChanceSheet")] [SerializeField] private NightMapChanceSheet m_NightMapChanceSheet;
     /// <summary>
