@@ -5,7 +5,7 @@ public class MainScene : MonoBehaviour {
     [SerializeField] private GameObject m_dayScenes;
     [SerializeField] private GameObject m_nightScenes;
     private void Awake() {
-        
+        GenerateNightScene();
     }
     public void GenerateDayScene() {
         DestroyAllChildren(transform);
