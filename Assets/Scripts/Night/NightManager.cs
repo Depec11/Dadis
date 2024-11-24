@@ -4,11 +4,12 @@ using UnityEngine.Serialization;
 
 public class NightManager : SceneManager {
     public static NightManager Instance { get; private set; }
-    [FormerlySerializedAs("m_mapChanceSheet")] [SerializeField] private NightMapChanceSheet mNightMapChanceSheet;
+    [FormerlySerializedAs("mNightMapChanceSheet")] [FormerlySerializedAs("m_mapChanceSheet")] [SerializeField] private NightMapChanceSheet m_NightMapChanceSheet;
     /// <summary>
     ///  [i, j]，i是行，j是列
     /// </summary>
     private NightMapStateEnum[,] m_map;
+    private bool[,] m_shadow;
     [SerializeField] private Transform m_mapTransform;
     // private static readonly string CHEST_PATH = "Scenes/Night/Prefabs/Chest";
     // private static readonly string PROP_PATH = "";
@@ -28,7 +29,6 @@ public class NightManager : SceneManager {
     public override void Load()  {
         throw new System.NotImplementedException();
     }
-
     private void Update() {
         if (Input.GetMouseButtonUp(0)) {
             HandleMove();
@@ -40,14 +40,16 @@ public class NightManager : SceneManager {
         }
     }
     private void GenerateMap() {
-        mNightMapChanceSheet.Check();
-        m_map = new NightMapStateEnum[mNightMapChanceSheet.MapCount, mNightMapChanceSheet.MapCount];
+        m_NightMapChanceSheet.Check();
+        m_map = new NightMapStateEnum[m_NightMapChanceSheet.MapCount, m_NightMapChanceSheet.MapCount];
+        m_shadow = new bool[m_NightMapChanceSheet.MapCount, m_NightMapChanceSheet.MapCount];
         List<Vector2Int> paths = new();
         // List<NightMapStateEnum> temp = new();
-        NightMapStateEnum[] sample = new NightMapStateEnum[4] { NightMapStateEnum.CHEST, NightMapStateEnum.PROP, NightMapStateEnum.PATH, NightMapStateEnum.MONSTER };
-        for (int i = 0; i < mNightMapChanceSheet.MapCount; i++) {
-            for (int j = 0; j < mNightMapChanceSheet.MapCount; j++) {
-                m_map[i, j] = mNightMapChanceSheet.GetRandomValue(sample);
+        NightMapStateEnum[] sample = new NightMapStateEnum[] { NightMapStateEnum.CHEST, NightMapStateEnum.PROP, NightMapStateEnum.PATH, NightMapStateEnum.MONSTER };
+        for (int i = 0; i < m_NightMapChanceSheet.MapCount; i++) {
+            for (int j = 0; j < m_NightMapChanceSheet.MapCount; j++) {
+                m_shadow[i, j] = true;
+                m_map[i, j] = m_NightMapChanceSheet.GetRandomValue(sample);
                 switch (m_map[i, j]) {
                     case NightMapStateEnum.CHEST:
                         InstantiateTile(m_chestPrefab, i, j);
@@ -76,22 +78,18 @@ public class NightManager : SceneManager {
     private void InstantiatePlayer(Vector2Int pos) {
         Player = InstantiateTile(m_playerPrefab, pos.x, pos.y).GetComponent<NightPlayer>();
         Player.Position = pos;
+        ShowMap(pos);
     }
     private void HandleMove()  {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        int r = -HandlePointToArrayIndex(pos.y);
-        int c = HandlePointToArrayIndex(pos.x);
-        if (r < 0 || c < 0 || r >= mNightMapChanceSheet.MapCount || c >= mNightMapChanceSheet.MapCount) {
-            Debug.Log("RETURN ON OUT OF MAP");
+        Vector2Int index = new Vector2Int(-HandlePointToArrayIndex(pos.y), HandlePointToArrayIndex(pos.x));
+        if (!InMap(index)) {
             return;
         }
-        if (r == Player.Position.x && r == Player.Position.y) {
-            Debug.Log("RETURN ON AS PLAYER");
+        if (index == Player.Position) {
             return;
         }
-        Debug.Log(new Vector2Int(r, c));
-        Debug.Log(Player.Position);
-        NightMapStateEnum target = m_map[r, c];
+        NightMapStateEnum target = m_map[index.x, index.y];
         switch (target) {
             case NightMapStateEnum.CHEST: 
                 Debug.Log("OPEN CHEST"); 
@@ -109,5 +107,35 @@ public class NightManager : SceneManager {
     }
     private int HandlePointToArrayIndex(float p) {
         return Mathf.RoundToInt(p);
+    }
+    public bool InMap(Vector2Int pos) {
+        return pos.x >= 0 && pos.y >= 0 && pos.x < m_NightMapChanceSheet.MapCount && pos.y < m_NightMapChanceSheet.MapCount;
+    }
+    public void ShowMap(Vector2Int pos) {
+        m_shadow[pos.x, pos.y] = false;
+        if (InMap(new Vector2Int(pos.x - 1, pos.y))) {
+            m_shadow[pos.x - 1, pos.y] = false;
+        }
+        if (InMap(new Vector2Int(pos.x + 1, pos.y))) {
+            m_shadow[pos.x + 1, pos.y] = false;
+        }
+        if (InMap(new Vector2Int(pos.x, pos.y - 1))) {
+            m_shadow[pos.x, pos.y - 1] = false;
+        }
+        if (InMap(new Vector2Int(pos.x, pos.y + 1))) {
+            m_shadow[pos.x, pos.y + 1] = false;
+        }
+        if (InMap(new Vector2Int(pos.x - 1, pos.y - 1))) {
+            m_shadow[pos.x - 1, pos.y - 1] = false;
+        }
+        if (InMap(new Vector2Int(pos.x - 1, pos.y + 1))) {
+            m_shadow[pos.x - 1, pos.y + 1] = false;
+        }
+        if (InMap(new Vector2Int(pos.x + 1, pos.y - 1))) {
+            m_shadow[pos.x + 1, pos.y - 1] = false;
+        }
+        if (InMap(new Vector2Int(pos.x + 1, pos.y + 1))) {
+            m_shadow[pos.x + 1, pos.y + 1] = false;
+        }
     }
 }
