@@ -10,4 +10,5 @@
 - 全局的工作空间在Scripts/下的非上述工作空间。
 - Scripts/Frame是Depec常用的扩展脚本。
 ## 计划
-- Depec 制作黑夜地图移动。
+- Depec 制作黑天场景。
+- Ffffishi 制作白天场景。
