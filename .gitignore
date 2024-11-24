@@ -72,5 +72,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Ignore IDEA File
-.idea/
-.vscode/
+.idea/**
+.vscode/**
