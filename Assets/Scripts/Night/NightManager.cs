@@ -10,6 +10,7 @@ public class NightManager : Frame.SceneManager {
     private NightMapStateEnum[,] m_map;
     private bool[,] m_shadow;
     [SerializeField] private Transform m_mapTransform;
+    [SerializeField] private Transform m_shadowTransform;
     // private static readonly string CHEST_PATH = "Scenes/Night/Prefabs/Chest";
     // private static readonly string PROP_PATH = "";
     // private static readonly string PATH_PATH = "";
@@ -19,6 +20,7 @@ public class NightManager : Frame.SceneManager {
     [SerializeField] private GameObject m_pathPrefab;
     [SerializeField] private GameObject m_monsterPrefab;
     [SerializeField] private GameObject m_playerPrefab;
+    [SerializeField] private GameObject m_shadowPrefab;
     public NightPlayer Player { get; private set; }
     protected override void Awake() {
         base.Awake();
@@ -35,7 +37,7 @@ public class NightManager : Frame.SceneManager {
         if (Player) {
             Vector3 pos = Player.transform.position;
             pos.z = Camera.main.transform.position.z;
-            Camera.main.transform.position = pos;
+            MainScene.MainCamera.transform.position = pos;
         }
     }
     private void GenerateMap() {
@@ -48,30 +50,34 @@ public class NightManager : Frame.SceneManager {
         for (int i = 0; i < m_NightMapChanceSheet.MapCount; i++) {
             for (int j = 0; j < m_NightMapChanceSheet.MapCount; j++) {
                 m_shadow[i, j] = true;
+                InstantiateTile(m_shadowPrefab , i,j, m_shadowTransform);
                 m_map[i, j] = m_NightMapChanceSheet.GetRandomValue(sample);
                 switch (m_map[i, j]) {
                     case NightMapStateEnum.CHEST:
-                        InstantiateTile(m_chestPrefab, i, j);
+                        InstantiateTile(m_chestPrefab, i, j, m_mapTransform);
                         break;
                     case NightMapStateEnum.PROP:
-                        InstantiateTile(m_propPrefab, i, j);
+                        InstantiateTile(m_propPrefab, i, j, m_mapTransform);
                         break;
                     case NightMapStateEnum.PATH:
                         paths.Add(new Vector2Int(i, j));
-                        InstantiateTile(m_pathPrefab, i, j);
+                        InstantiateTile(m_pathPrefab, i, j, m_mapTransform);
                         break;
                     case NightMapStateEnum.MONSTER:
-                        InstantiateTile(m_monsterPrefab, i, j);
+                        InstantiateTile(m_monsterPrefab, i, j, m_mapTransform);
                         break;
                 }
             }
         }
         InstantiatePlayer(paths[Random.Range(0, paths.Count)]);
     }
-    private GameObject InstantiateTile(GameObject go, int r, int c) {
-        GameObject instance = Instantiate(go, m_mapTransform);
-        instance.transform.position = new Vector2(c, -r);   // Unity 和 计算机图形学的坐标系不一样，:(
-        instance.GetComponent<NightMapObject>().Position = new Vector2Int(r, c);
+    private GameObject InstantiateTile(GameObject go, int r, int c, Transform parent = null) {
+        GameObject instance = Instantiate(go, parent);
+        instance.transform.localPosition = new Vector2(c, -r);   // Unity 和 计算机图形学的坐标系不一样，:(
+        NightMapObject nmo = instance.GetComponent<NightMapObject>();
+        if (nmo) {
+            nmo.Position = new Vector2Int(r, c);
+        }
         return instance;
     }
     private void InstantiatePlayer(Vector2Int pos) {
@@ -82,7 +88,10 @@ public class NightManager : Frame.SceneManager {
     private void HandleMove()  {
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2Int index = new Vector2Int(-HandlePointToArrayIndex(pos.y), HandlePointToArrayIndex(pos.x));
-        if (!InMap(index)) {
+        if (!InMap(index.x, index.y)) {
+            return;
+        }
+        if (m_shadow[index.x, index.y]) {
             return;
         }
         if (index == Player.Position) {
@@ -107,34 +116,39 @@ public class NightManager : Frame.SceneManager {
     private int HandlePointToArrayIndex(float p) {
         return Mathf.RoundToInt(p);
     }
-    public bool InMap(Vector2Int pos) {
-        return pos.x >= 0 && pos.y >= 0 && pos.x < m_NightMapChanceSheet.MapCount && pos.y < m_NightMapChanceSheet.MapCount;
+    public bool InMap(int x, int y) {
+        return x >= 0 && y >= 0  && x < m_NightMapChanceSheet.MapCount && y < m_NightMapChanceSheet.MapCount;
     }
     public void ShowMap(Vector2Int pos) {
-        m_shadow[pos.x, pos.y] = false;
-        if (InMap(new Vector2Int(pos.x - 1, pos.y))) {
-            m_shadow[pos.x - 1, pos.y] = false;
+        ShowShadow(pos.x, pos.y);
+        if (InMap(pos.x - 1, pos.y)) {
+            ShowShadow(pos.x - 1, pos.y);
         }
-        if (InMap(new Vector2Int(pos.x + 1, pos.y))) {
-            m_shadow[pos.x + 1, pos.y] = false;
+        if (InMap(pos.x + 1, pos.y)) {
+            ShowShadow(pos.x + 1, pos.y);
         }
-        if (InMap(new Vector2Int(pos.x, pos.y - 1))) {
-            m_shadow[pos.x, pos.y - 1] = false;
+        if (InMap(pos.x, pos.y - 1)) {
+            ShowShadow(pos.x, pos.y - 1);
         }
-        if (InMap(new Vector2Int(pos.x, pos.y + 1))) {
-            m_shadow[pos.x, pos.y + 1] = false;
+        if (InMap(pos.x, pos.y + 1)) {
+            ShowShadow(pos.x, pos.y + 1);
         }
-        if (InMap(new Vector2Int(pos.x - 1, pos.y - 1))) {
-            m_shadow[pos.x - 1, pos.y - 1] = false;
+        if (InMap(pos.x - 1, pos.y - 1)) {
+            ShowShadow(pos.x - 1, pos.y - 1);
         }
-        if (InMap(new Vector2Int(pos.x - 1, pos.y + 1))) {
-            m_shadow[pos.x - 1, pos.y + 1] = false;
+        if (InMap(pos.x - 1, pos.y + 1)) {
+            ShowShadow(pos.x - 1, pos.y + 1);
         }
-        if (InMap(new Vector2Int(pos.x + 1, pos.y - 1))) {
-            m_shadow[pos.x + 1, pos.y - 1] = false;
+        if (InMap(pos.x + 1, pos.y - 1)) {
+            ShowShadow(pos.x + 1, pos.y - 1);
         }
-        if (InMap(new Vector2Int(pos.x + 1, pos.y + 1))) {
-            m_shadow[pos.x + 1, pos.y + 1] = false;
+        if (InMap(pos.x + 1, pos.y + 1)) {
+            ShowShadow(pos.x + 1, pos.y + 1);
         }
+    }
+    private void ShowShadow(int r, int c) {
+        m_shadow[r, c] = false;
+        Transform shadow = m_shadowTransform.GetChild(r * m_NightMapChanceSheet.MapCount + c + 1);
+        shadow.gameObject.SetActive(false);
     }
 }

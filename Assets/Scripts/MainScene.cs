@@ -4,6 +4,8 @@ using UnityEngine;
 using static Frame.UsefulFunctions;
 
 public class MainScene : MonoBehaviour {
+    public static MainScene Instance { get; private set; }
+    public static Camera MainCamera { get; private set; }
     /// <summary>
     /// 白天场景
     /// </summary>
@@ -13,6 +15,8 @@ public class MainScene : MonoBehaviour {
     /// </summary>
     [SerializeField] private GameObject m_nightScenes;
     private void Awake() {
+        Instance = this;
+        MainCamera = Camera.main;
         GenerateNightScene();
     }
     /// <summary>

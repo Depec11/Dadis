@@ -93,6 +93,37 @@ Transform:
   m_GameObject: {fileID: 3786909015390688427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5515113329028144092}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4576342170332898599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933680402662952905}
+  m_Layer: 0
+  m_Name: Shadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1933680402662952905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4576342170332898599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -311,6 +342,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5221521313596452048}
+  - {fileID: 1933680402662952905}
   - {fileID: 1553930831247468459}
   - {fileID: 3141826723277822823}
   m_Father: {fileID: 0}
@@ -327,10 +359,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 894e851daa068fa4ea238c8286259058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_mapChanceSheet: {fileID: 11400000, guid: 88ac49f1ceaa54c48935f9ec72f8f960, type: 2}
+  m_NightMapChanceSheet: {fileID: 11400000, guid: 88ac49f1ceaa54c48935f9ec72f8f960, type: 2}
   m_mapTransform: {fileID: 5221521313596452048}
+  m_shadowTransform: {fileID: 1933680402662952905}
   m_chestPrefab: {fileID: 4801005417558662996, guid: 4756382c34ec8d24090c08217585091e, type: 3}
   m_propPrefab: {fileID: 4801005417558662996, guid: 5b9c9563a239cd24e8752ef60b8f9b0b, type: 3}
   m_pathPrefab: {fileID: 4801005417558662996, guid: 3e5156cea91f52d4297951d92e0e1021, type: 3}
   m_monsterPrefab: {fileID: 4801005417558662996, guid: 28db30df71a6f6747a092e3ab982d19e, type: 3}
   m_playerPrefab: {fileID: 4801005417558662996, guid: c7fad710e1669e14c940eb4b5b5ba171, type: 3}
+  m_shadowPrefab: {fileID: 4801005417558662996, guid: 7d64778c8396b8f4ba74b50260080e49, type: 3}
