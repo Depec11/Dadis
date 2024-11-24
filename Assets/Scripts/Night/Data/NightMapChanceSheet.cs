@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = ("Data/MapChanceSheet"), fileName = ("MapChanceSheet_"))]
-[Serializable] public class MapChanceSheet : ScriptableObject {
-    [Tooltip("ÃÔ¹¬´óÐ¡£¬ ÐèÒªµÄÊÇN*NµÄN")][Range(5, 20)][SerializeField] private int m_mapCount;
-    [Tooltip("±¦Ïä¸ÅÂÊ")][Range(0.1f, 0.9f)][SerializeField] private float m_chestChance;
-    [Tooltip("µÀ¾ß¸ÅÂÊ")][Range(0.1f, 0.9f)][SerializeField] private float m_propChance;
-    [Tooltip("Í¨Â·¸ÅÂÊ")][Range(0.1f, 0.9f)][SerializeField] private float m_pathChance;
-    [Tooltip("¹ÖÎï¸ÅÂÊ")][Range(0.1f, 0.9f)][SerializeField] private float m_monsterChance;
+[Serializable] public class NightMapChanceSheet : ScriptableObject {
+    [Tooltip("ï¿½Ô¹ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½N*Nï¿½ï¿½N")][Range(5, 20)][SerializeField] private int m_mapCount;
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")][Range(0.1f, 0.9f)][SerializeField] private float m_chestChance;
+    [Tooltip("ï¿½ï¿½ï¿½ß¸ï¿½ï¿½ï¿½")][Range(0.1f, 0.9f)][SerializeField] private float m_propChance;
+    [Tooltip("Í¨Â·ï¿½ï¿½ï¿½ï¿½")][Range(0.1f, 0.9f)][SerializeField] private float m_pathChance;
+    [Tooltip("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")][Range(0.1f, 0.9f)][SerializeField] private float m_monsterChance;
     public int MapCount => m_mapCount;
     public float ChestChance => m_chestChance;
     public float PropChance => m_propChance;
