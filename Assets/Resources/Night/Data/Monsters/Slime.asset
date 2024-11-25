@@ -16,5 +16,5 @@ MonoBehaviour:
   m_damage: 15
   m_nightmareCrystalline: 3
   m_prefab: {fileID: 0}
-  m_droppingType: 0
-  m_dropping: {fileID: 11400000, guid: 2e5097a2cbc42dd468cab8a691c8c37e, type: 2}
+  m_dropping:
+  - {fileID: 11400000, guid: 2e5097a2cbc42dd468cab8a691c8c37e, type: 2}

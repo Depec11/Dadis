@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1c85ae5f4b69514bbe710fc5de64a6c, type: 3}
-  m_Name: NightMonsterChacne
+  m_Name: ForestNightMonsterChacneSheet
   m_EditorClassIdentifier: 
   pairList:
   - first: 0.16

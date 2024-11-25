@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class PlayerState {
     /// <summary>
     /// 梦境能量
@@ -33,6 +33,12 @@ public class PlayerState {
     /// </summary>
     public void AddToBackpack(Item item) {
         Backpack.Add(item);
+    }
+    
+    public void AddToBackpack(List<Item> items) {
+        foreach (var it in items) {
+            Backpack.Add(it);
+        }
     }
     /// <summary>
     /// 移除背包

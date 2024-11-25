@@ -36,7 +36,7 @@ using UnityEngine;
     /// <summary>
     /// 名称
     /// </summary>
-    public string name = "DefaultItem";
+    public new string name = "DefaultItem";
     /// <summary>
     /// 描述
     /// </summary>

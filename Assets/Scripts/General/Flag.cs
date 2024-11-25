@@ -19,5 +19,13 @@ namespace Flag {
         /// 材料
         /// </summary>
         INGREDIENT = 0x2,
+        /// <summary>
+        /// 卷轴
+        /// </summary>
+        REEL = 0x3,
+        /// <summary>
+        /// 装备
+        /// </summary>
+        EQUIPMENT = 0x4,
     }
 }

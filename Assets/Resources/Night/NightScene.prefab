@@ -392,7 +392,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_nightMapChanceSheet: {fileID: 11400000, guid: 88ac49f1ceaa54c48935f9ec72f8f960, type: 2}
-  m_nightMonsterChance: {fileID: 11400000, guid: 0025458e182095f40b7cf69b07a8f7b3, type: 2}
+  m_NightMonsterChanceSheet: {fileID: 11400000, guid: 0025458e182095f40b7cf69b07a8f7b3, type: 2}
+  m_NightChestChanceSheet: {fileID: 11400000, guid: 0ecc6386cf7956847a66fd08b1f25745, type: 2}
+  m_NightPropChanceSheet: {fileID: 11400000, guid: df98ead035d2e7240a5f329c59a89383, type: 2}
   m_mapParent: {fileID: 5221521313596452048}
   m_shadowParent: {fileID: 1933680402662952905}
   m_playerParent: {fileID: 2893542213362871215}

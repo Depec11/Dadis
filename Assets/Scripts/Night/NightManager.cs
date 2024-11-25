@@ -4,7 +4,9 @@ using UnityEngine.Serialization;
 public class NightManager : Frame.SceneManager {
     public static NightManager Instance { get; private set; }
     [SerializeField] private NightMapChanceSheet m_nightMapChanceSheet;
-    [SerializeField] private NightMonsterChance m_nightMonsterChance;
+    [SerializeField] private NightMonsterChanceSheet m_NightMonsterChanceSheet;
+    [SerializeField] private NightChestChanceSheet m_NightChestChanceSheet;
+    [SerializeField] private NightPropChanceSheet m_NightPropChanceSheet;
     /// <summary>
     ///  [i, j]，i是行，j是列
     /// </summary>
@@ -82,10 +84,14 @@ public class NightManager : Frame.SceneManager {
         }
 
         switch (type) {
-            case NightMapStateEnum.CHEST: break;
-            case NightMapStateEnum.PROP: break;
+            case NightMapStateEnum.CHEST:
+                ((NightChest)nmo).data = m_NightChestChanceSheet.RandomValue();
+                break;
+            case NightMapStateEnum.PROP: 
+                ((NightProp)nmo).data = m_NightPropChanceSheet.RandomValue();
+                break;
             case NightMapStateEnum.MONSTER:
-                ((NightMonster)nmo).data = m_nightMonsterChance.RandomValue();
+                ((NightMonster)nmo).data = m_NightMonsterChanceSheet.RandomValue();
                 break;
         }
         return instance;
@@ -213,7 +219,10 @@ public class NightManager : Frame.SceneManager {
                 Debug.Log("OPEN CHEST"); 
                 break;
             case NightMapStateEnum.PROP: 
-                Debug.Log("PICK UP THE PROP"); 
+                Debug.Log("拾取物品");
+                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+                GetTargetChild(m_mapParent, pos).SetActive(false);
+                MainScene.PlayerState.AddToBackpack(GetTargetChildScript<NightProp>(m_mapParent, pos).data.items);
                 break;
             case NightMapStateEnum.PATH: 
                 // Debug.Log("GO TO THE PATH"); 

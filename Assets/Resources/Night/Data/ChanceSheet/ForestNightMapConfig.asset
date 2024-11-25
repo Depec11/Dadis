@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a10e730333144d4397d9c908bcf16fd, type: 3}
-  m_Name: NightMapConfig
+  m_Name: ForestNightMapConfig
   m_EditorClassIdentifier: 
   m_mapCount: 10
   m_chestChance: 0.1
