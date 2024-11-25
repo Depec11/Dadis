@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lion
   m_EditorClassIdentifier: 
   m_animalType: 2
-  m_damage: 0
+  m_damage: 20
   m_prefab: {fileID: 0}
   m_dropping:
   - {fileID: 11400000, guid: 29a88c55585b9174b8e34548160019b0, type: 2}
