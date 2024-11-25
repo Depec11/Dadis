@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  uid: 103
   count: 1
   level: 1
   type: 2
@@ -19,3 +20,5 @@ MonoBehaviour:
   duration: -1
   maxCount: 999
   name: "\u6728\u5934"
+  description: 
+  icon: {fileID: 0}

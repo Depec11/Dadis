@@ -4,7 +4,11 @@ using UnityEngine;
 /// 物品，继承自物体
 /// </summary>
 [CreateAssetMenu(menuName = ("Data/Item"), fileName = ("Item_"))]
-[Serializable] public class Item : ScriptableObject { 
+[Serializable] public class Item : ScriptableObject {
+    /// <summary>
+    /// UID
+    /// </summary>
+    public int uid;
     /// <summary>
     /// 数量
     /// </summary>
@@ -34,6 +38,14 @@ using UnityEngine;
     /// </summary>
     public string name = "DefaultItem";
     /// <summary>
+    /// 描述
+    /// </summary>
+    public string description = "";
+    /// <summary>
+    /// 图标
+    /// </summary>
+    public Sprite icon;
+    /// <summary>
     /// 初始化
     /// </summary>
     /// <param name="l">等级</param>
@@ -42,13 +54,15 @@ using UnityEngine;
     /// <param name="mc">最大堆叠数</param>
     /// <param name="t">类型</param>
     /// <param name="n">名称</param>
-    public Item(int l, int c, int d, int mc, Flag.ItemType t = Flag.ItemType.DEFAULT, string n = "DefaultItem") {
+    public Item(int u, int l, int c, int d, int mc, Flag.ItemType t = Flag.ItemType.DEFAULT, string n = "DefaultItem", string ds = "DefaultItem") {
+        uid = u;
         level = l;
         count = c;
         duration = d;
         maxCount = mc;
         type = t;
         name = n;
+        description = ds;
         if (duration == -1) {
             unbrokenable = true;
         }
@@ -99,13 +113,6 @@ using UnityEngine;
     public override string ToString() {
         return name;
     }
-    /// <summary>
-    /// 获取描述
-    /// </summary>
-    /// <returns>描述</returns>
-    public virtual string GetDesc() {
-        return "";
-    }
 #if DEBUG
     /// <summary>
     /// 复制物品
@@ -118,14 +125,7 @@ using UnityEngine;
     }
 #endif
     /// <summary>
-    /// 获取可交互文本
-    /// </summary>
-    /// <returns>可交互文本</returns>
-    public virtual string GetInteractiveText() {
-        return "";
-    }
-    /// <summary>
-    /// 销毁物品
+    /// 销毁物品时调用
     /// </summary>
     public virtual void Dispose() { }
 }

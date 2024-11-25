@@ -8,7 +8,6 @@ public class Backpack {
     /// 物品表
     /// </summary>
     public List<Item> items = new();
-
     public Backpack() { }
     /// <summary>
     /// 添加物品
@@ -89,12 +88,27 @@ public class Backpack {
     /// <param name="level">等级</param>
     /// <param name="count">数量</param>
     /// <returns>是否具有</returns>
-    public bool Seacrch(string name, int level, int count) {
+    public bool Seacrch(int uid, int level, int count) {
         foreach (Item it in items) {
-            if (it.name == name && it.level == level && it.count >= count) {
+            if (it.uid == uid && it.level == level && it.count >= count) {
                 return true;
             }
         }
         return false;
+    }
+    /// <summary>
+    /// 获得特定的物品
+    /// </summary>
+    /// <param name="uid">UID</param>
+    /// <param name="level">等级</param>
+    /// <returns>物品</returns>
+    public List<Item> Get(int uid, int level) {
+        List<Item> result = new();
+        foreach (Item it in items) {
+            if (it.uid == uid && it.level == level) {
+                result.Add(it);
+            }
+        }
+        return result;
     }
 }

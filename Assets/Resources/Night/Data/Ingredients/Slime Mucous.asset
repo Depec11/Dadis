@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
   m_Name: Slime Mucous
   m_EditorClassIdentifier: 
+  uid: 100
   count: 1
   level: 1
   type: 2
@@ -19,3 +20,5 @@ MonoBehaviour:
   duration: -1
   maxCount: 999
   name: "\u53F2\u83B1\u59C6\u51DD\u6DB2"
+  description: 
+  icon: {fileID: 0}
