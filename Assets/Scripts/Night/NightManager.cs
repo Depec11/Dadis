@@ -19,7 +19,7 @@ public class NightManager : Frame.SceneManager {
     [SerializeField] private GameObject m_playerPrefab;
     [SerializeField] private GameObject m_shadowPrefab;
     private List<Vector2Int> m_paths = new();
-    public NightPlayer Player { get; private set; }
+    public NightPlayerObject Player { get; private set; }
     [SerializeField] private float m_playerSpeed = 10.0f;
     protected override void Awake() {
         base.Awake();
@@ -82,7 +82,7 @@ public class NightManager : Frame.SceneManager {
         return instance;
     }
     private void InstantiatePlayer(Vector2Int pos) {
-        Player = InstantiateTile(m_playerPrefab, pos.x, pos.y, m_playerParent).GetComponent<NightPlayer>();
+        Player = InstantiateTile(m_playerPrefab, pos.x, pos.y, m_playerParent).GetComponent<NightPlayerObject>();
         Player.Position = pos;
         ShowMap(pos);
     }

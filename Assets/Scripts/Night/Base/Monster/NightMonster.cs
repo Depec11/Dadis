@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class NightMonster {
+public class NightMonster : NightMapObject {
     public NightMonsterData m_data;
 }

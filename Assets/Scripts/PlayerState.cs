@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerState {
     public int NightTimeEnergy { get; set; }
-    public int NightDeffence { get; set; }
+    public int NightDefense { get; set; }
     public int EmotionEnergy { get; set; }
     public int NightmareCrystalline { get; set; }
     public Backpack Backpack { get; set; }

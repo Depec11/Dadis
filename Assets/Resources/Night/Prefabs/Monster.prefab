@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6328025906215370985}
-  - component: {fileID: 5787971970996719112}
   - component: {fileID: -7558414001787802523}
+  - component: {fileID: 5786575360018883870}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5787971970996719112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4801005417558662996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a74ef963afe7154284022948e826787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_state: 4
 --- !u!212 &-7558414001787802523
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -98,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5786575360018883870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801005417558662996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15c60d67edd7ea4c9bbe085d0518655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_state: 4
+  m_data: {fileID: 0}

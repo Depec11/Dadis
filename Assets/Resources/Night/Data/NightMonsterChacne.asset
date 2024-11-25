@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c85ae5f4b69514bbe710fc5de64a6c, type: 3}
+  m_Name: NightMonsterChacne
+  m_EditorClassIdentifier: 
+  pairList:
+  - first: 0.16
+    second: {fileID: 11400000, guid: 8fd79d5bd87396e4cbce1bcfa06f86c5, type: 2}
+  - first: 0.12
+    second: {fileID: 11400000, guid: 65526ccda4d1af241a3df5858c4c4006, type: 2}
+  - first: 0.8
+    second: {fileID: 11400000, guid: ccee42c83c887ab4790156570c5cdb8c, type: 2}
+  - first: 0.3
+    second: {fileID: 11400000, guid: b1a7de721b5b53c498e72dd7eb17cccb, type: 2}
+  - first: 0.1
+    second: {fileID: 11400000, guid: c3cc2668485c42849bb7a6652a707f17, type: 2}

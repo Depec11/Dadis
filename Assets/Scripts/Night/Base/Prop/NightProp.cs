@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class NightProp {
+public class NightProp : NightMapObject {
     public NightPropData m_data;
 }
