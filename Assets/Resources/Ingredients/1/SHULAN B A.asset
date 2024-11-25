@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: Bat Wings
+  m_Name: SHULAN B A
   m_EditorClassIdentifier: 
-  uid: 101
+  uid: 100
   count: 1
   level: 1
-  type: 2
+  type: 5
   unbrokenable: 1
   duration: -1
   maxCount: 999
-  name: "\u8759\u8760\u7FC5\u8180"
+  name: "\u7761\u7720\u9C7C\u9AA8"
   description: 
   icon: {fileID: 0}

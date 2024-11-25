@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: Wood Heart
+  m_Name: LION B
   m_EditorClassIdentifier: 
-  uid: 104
+  uid: 103
   count: 1
   level: 1
-  type: 2
+  type: 5
   unbrokenable: 1
   duration: -1
   maxCount: 999
-  name: "\u6728\u4E4B\u5FC3"
+  name: "\u72EE\u5FC3\u8089"
   description: 
   icon: {fileID: 0}

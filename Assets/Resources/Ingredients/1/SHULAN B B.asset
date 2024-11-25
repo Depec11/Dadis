@@ -9,12 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181d8891a3f78a94a86ae9a24d0f9adf, type: 3}
-  m_Name: Tree
+  m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
+  m_Name: SHULAN B B
   m_EditorClassIdentifier: 
-  m_name: "\u6811\u5996"
-  m_damage: 100
-  m_nightmareCrystalline: 20
-  m_prefab: {fileID: 0}
-  m_dropping:
-  - {fileID: 11400000, guid: 45304f6f5bda8624e89c91148c05e6f1, type: 2}
+  uid: 101
+  count: 1
+  level: 1
+  type: 5
+  unbrokenable: 1
+  duration: -1
+  maxCount: 999
+  name: "\u68C9\u82B1\u4E91\u83C7"
+  description: 
+  icon: {fileID: 0}

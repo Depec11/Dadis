@@ -8,7 +8,7 @@ public class PlayerState {
     /// <summary>
     /// 噩梦抗性
     /// </summary>
-    public int NightDefense { get; set; }
+    public int NightHitPoint { get; set; }
     /// <summary>
     /// 情绪能量
     /// </summary>
@@ -23,7 +23,7 @@ public class PlayerState {
     public Backpack Backpack { get; set; }
     public PlayerState() {
         DreamEnergy = 0;
-        NightDefense = 0;
+        NightHitPoint = 0;
         EmotionEnergy = 0;
         NightmareCrystalline = 0;
         Backpack = new Backpack();

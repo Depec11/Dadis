@@ -6,7 +6,7 @@ public class NightManager : Frame.SceneManager {
     [SerializeField] private NightMapChanceSheet m_nightMapChanceSheet;
     [SerializeField] private NightMonsterChanceSheet m_NightMonsterChanceSheet;
     [SerializeField] private NightChestChanceSheet m_NightChestChanceSheet;
-    [SerializeField] private NightPropChanceSheet m_NightPropChanceSheet;
+    // [SerializeField] private NightPropChanceSheet m_NightPropChanceSheet;
     /// <summary>
     ///  [i, j]，i是行，j是列
     /// </summary>
@@ -16,8 +16,8 @@ public class NightManager : Frame.SceneManager {
     [SerializeField] private Transform m_shadowParent;
     [SerializeField] private Transform m_playerParent;
     [SerializeField] private GameObject m_chestPrefab;
-    [SerializeField] private GameObject m_propPrefab;
     [SerializeField] private GameObject m_pathPrefab;
+    [SerializeField] private GameObject m_trapPrefab;
     [SerializeField] private GameObject m_monsterPrefab;
     [SerializeField] private GameObject m_playerPrefab;
     [SerializeField] private GameObject m_shadowPrefab;
@@ -46,30 +46,31 @@ public class NightManager : Frame.SceneManager {
         }
     }
     private void GenerateMap() {
-        m_nightMapChanceSheet.Check();
-        m_map = new NightMapStateEnum[m_nightMapChanceSheet.MapCount, m_nightMapChanceSheet.MapCount];
-        m_shadow = new bool[m_nightMapChanceSheet.MapCount, m_nightMapChanceSheet.MapCount];
+        m_map = new NightMapStateEnum[m_nightMapChanceSheet.MapSize, m_nightMapChanceSheet.MapSize];
+        m_shadow = new bool[m_nightMapChanceSheet.MapSize, m_nightMapChanceSheet.MapSize];
         List<Vector2Int> paths = new();
-        NightMapStateEnum[] sample = new NightMapStateEnum[] { NightMapStateEnum.CHEST, NightMapStateEnum.PROP, NightMapStateEnum.PATH, NightMapStateEnum.MONSTER };
-        for (int i = 0; i < m_nightMapChanceSheet.MapCount; i++) {
-            for (int j = 0; j < m_nightMapChanceSheet.MapCount; j++) {
+        for (int i = 0; i < m_nightMapChanceSheet.MapSize; i++) {
+            for (int j = 0; j < m_nightMapChanceSheet.MapSize; j++) {
                 m_shadow[i, j] = true;
                 InstantiateTile(m_shadowPrefab , i,j, parent:m_shadowParent);
-                m_map[i, j] = m_nightMapChanceSheet.GetRandomValue(sample);
+                m_map[i, j] = m_nightMapChanceSheet.RandomValue();
                 switch (m_map[i, j]) {
                     case NightMapStateEnum.CHEST:
                         InstantiateTile(m_chestPrefab, i, j, NightMapStateEnum.CHEST, m_mapParent);
-                        break;
-                    case NightMapStateEnum.PROP:
-                        InstantiateTile(m_propPrefab, i, j, NightMapStateEnum.PROP, m_mapParent);
                         break;
                     case NightMapStateEnum.PATH:
                         paths.Add(new Vector2Int(i, j));
                         InstantiateTile(m_pathPrefab, i, j, parent:m_mapParent);
                         break;
-                    case NightMapStateEnum.MONSTER:
-                        InstantiateTile(m_monsterPrefab, i, j, NightMapStateEnum.MONSTER, m_mapParent);
+                    case NightMapStateEnum.TRAP:
+                        InstantiateTile(m_trapPrefab, i, j, NightMapStateEnum.TRAP, m_mapParent);
                         break;
+                    case NightMapStateEnum.MONSTER_A:
+                        InstantiateTile(m_monsterPrefab, i, j, NightMapStateEnum.MONSTER_A, m_mapParent);
+                        break; 
+                    case NightMapStateEnum.MONSTER_B:
+                        InstantiateTile(m_monsterPrefab, i, j, NightMapStateEnum.MONSTER_B, m_mapParent);
+                        break; 
                 }
             }
         }
@@ -86,12 +87,6 @@ public class NightManager : Frame.SceneManager {
         switch (type) {
             case NightMapStateEnum.CHEST:
                 ((NightChest)nmo).data = m_NightChestChanceSheet.RandomValue();
-                break;
-            case NightMapStateEnum.PROP: 
-                ((NightProp)nmo).data = m_NightPropChanceSheet.RandomValue();
-                break;
-            case NightMapStateEnum.MONSTER:
-                ((NightMonster)nmo).data = m_NightMonsterChanceSheet.RandomValue();
                 break;
         }
         return instance;
@@ -131,7 +126,7 @@ public class NightManager : Frame.SceneManager {
         }
     }
     private List<Vector2Int> GoTo(Vector2Int target) {
-        int N = m_nightMapChanceSheet.MapCount;
+        int N = m_nightMapChanceSheet.MapSize;
         bool[] visited = new bool[N * N];
         void MarkVisited(Vector2Int pos) {
             visited[pos.x * N + pos.y] = true;
@@ -199,7 +194,7 @@ public class NightManager : Frame.SceneManager {
         return Mathf.RoundToInt(p);
     }
     public bool InMap(int x, int y) {
-        return x >= 0 && y >= 0  && x < m_nightMapChanceSheet.MapCount && y < m_nightMapChanceSheet.MapCount;
+        return x >= 0 && y >= 0  && x < m_nightMapChanceSheet.MapSize && y < m_nightMapChanceSheet.MapSize;
     }
     private bool CheckShadow(int x, int y) {
         return InMap(x, y) && !m_shadow[x, y];
@@ -218,49 +213,25 @@ public class NightManager : Frame.SceneManager {
             case NightMapStateEnum.CHEST: 
                 Debug.Log("OPEN CHEST"); 
                 break;
-            case NightMapStateEnum.PROP: 
+            /*case NightMapStateEnum.PROP: 
                 Debug.Log("拾取物品");
                 m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
                 GetTargetChild(m_mapParent, pos).SetActive(false);
                 MainScene.PlayerState.AddToBackpack(GetTargetChildScript<NightProp>(m_mapParent, pos).data.items);
-                break;
+                break;*/
             case NightMapStateEnum.PATH: 
                 // Debug.Log("GO TO THE PATH"); 
                 m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
                 GetTargetChild(m_mapParent, pos).SetActive(false);
                 break;
-            case NightMapStateEnum.MONSTER:
+            /*case NightMapStateEnum.MONSTER:
                 Battle(pos);
-                break;
+                break;*/
         }
-        /*if (InMap(pos.x - 1, pos.y)) {
-            ShowShadow(pos.x - 1, pos.y);
-        }
-        if (InMap(pos.x + 1, pos.y)) {
-            ShowShadow(pos.x + 1, pos.y);
-        }
-        if (InMap(pos.x, pos.y - 1)) {
-            ShowShadow(pos.x, pos.y - 1);
-        }
-        if (InMap(pos.x, pos.y + 1)) {
-            ShowShadow(pos.x, pos.y + 1);
-        }
-        if (InMap(pos.x - 1, pos.y - 1)) {
-            ShowShadow(pos.x - 1, pos.y - 1);
-        }
-        if (InMap(pos.x - 1, pos.y + 1)) {
-            ShowShadow(pos.x - 1, pos.y + 1);
-        }
-        if (InMap(pos.x + 1, pos.y - 1)) {
-            ShowShadow(pos.x + 1, pos.y - 1);
-        }
-        if (InMap(pos.x + 1, pos.y + 1)) {
-            ShowShadow(pos.x + 1, pos.y + 1);
-        }*/
     }
     private void ShowShadow(int r, int c) {
         m_shadow[r, c] = false;
-        Transform shadow = m_shadowParent.GetChild(r * m_nightMapChanceSheet.MapCount + c);
+        Transform shadow = m_shadowParent.GetChild(r * m_nightMapChanceSheet.MapSize + c);
         shadow.gameObject.SetActive(false);
     }
     private void Battle(Vector2Int pos) {
@@ -268,14 +239,14 @@ public class NightManager : Frame.SceneManager {
         NightMonster monster = GetTargetChildScript<NightMonster>(m_mapParent, pos);
         NightMonsterData data = monster.data;
         MainScene.PlayerState.DreamEnergy -= data.Damage;
-        MainScene.PlayerState.NightmareCrystalline += data.NightmareCrystalline;
+        // MainScene.PlayerState.NightmareCrystalline += data.NightmareCrystalline;
         MainScene.PlayerState.AddToBackpack(data.Dropping);
         monster.gameObject.SetActive(false);
         m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
     }
 
     private GameObject GetTargetChild(Transform parent, Vector2Int pos) {
-        return parent.GetChild(pos.x * m_nightMapChanceSheet.MapCount + pos.y).gameObject;;
+        return parent.GetChild(pos.x * m_nightMapChanceSheet.MapSize + pos.y).gameObject;;
     }
     private T GetTargetChildScript<T>(Transform parent, Vector2Int pos) {
         return GetTargetChild(parent, pos).GetComponent<T>();

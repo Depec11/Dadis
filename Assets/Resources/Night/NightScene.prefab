@@ -280,7 +280,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7696381651359863469
 RectTransform:
   m_ObjectHideFlags: 0
@@ -394,13 +394,12 @@ MonoBehaviour:
   m_nightMapChanceSheet: {fileID: 11400000, guid: 88ac49f1ceaa54c48935f9ec72f8f960, type: 2}
   m_NightMonsterChanceSheet: {fileID: 11400000, guid: 0025458e182095f40b7cf69b07a8f7b3, type: 2}
   m_NightChestChanceSheet: {fileID: 11400000, guid: 0ecc6386cf7956847a66fd08b1f25745, type: 2}
-  m_NightPropChanceSheet: {fileID: 11400000, guid: df98ead035d2e7240a5f329c59a89383, type: 2}
   m_mapParent: {fileID: 5221521313596452048}
   m_shadowParent: {fileID: 1933680402662952905}
   m_playerParent: {fileID: 2893542213362871215}
   m_chestPrefab: {fileID: 4801005417558662996, guid: 4756382c34ec8d24090c08217585091e, type: 3}
-  m_propPrefab: {fileID: 4801005417558662996, guid: 5b9c9563a239cd24e8752ef60b8f9b0b, type: 3}
   m_pathPrefab: {fileID: 4801005417558662996, guid: 3e5156cea91f52d4297951d92e0e1021, type: 3}
+  m_trapPrefab: {fileID: 4801005417558662996, guid: f64fb7a9d878d944581be6beb06e39be, type: 3}
   m_monsterPrefab: {fileID: 4801005417558662996, guid: 28db30df71a6f6747a092e3ab982d19e, type: 3}
   m_playerPrefab: {fileID: 4801005417558662996, guid: c7fad710e1669e14c940eb4b5b5ba171, type: 3}
   m_shadowPrefab: {fileID: 4801005417558662996, guid: 7d64778c8396b8f4ba74b50260080e49, type: 3}

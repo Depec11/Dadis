@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: Forest Mine
+  m_Name: LION S B
   m_EditorClassIdentifier: 
   uid: 105
   count: 1
   level: 1
-  type: 2
+  type: 6
   unbrokenable: 1
   duration: -1
   maxCount: 999
-  name: "\u68EE\u6797\u77FF"
+  name: "\u70C8\u7130\u6912"
   description: 
   icon: {fileID: 0}

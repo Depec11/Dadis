@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: Dark Flower
+  m_Name: SHULAN S
   m_EditorClassIdentifier: 
   uid: 102
   count: 1
   level: 1
-  type: 2
+  type: 6
   unbrokenable: 1
   duration: -1
   maxCount: 999
-  name: "\u6697\u4E4B\u82B1"
+  name: "\u6162\u65F6\u8349"
   description: 
   icon: {fileID: 0}
