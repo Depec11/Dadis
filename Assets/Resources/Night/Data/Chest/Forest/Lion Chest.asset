@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 181d8891a3f78a94a86ae9a24d0f9adf, type: 3}
-  m_Name: Sloth
+  m_Script: {fileID: 11500000, guid: 92f522d996f3d1941b01f6f6efc7fed9, type: 3}
+  m_Name: Lion Chest
   m_EditorClassIdentifier: 
-  m_animalType: 1
-  m_damage: 15
-  m_prefab: {fileID: 0}
-  m_dropping:
-  - {fileID: 11400000, guid: 62449371e41b7144fae5eae9d41e7669, type: 2}
+  m_Items:
+  - {fileID: 11400000, guid: 0d9103c4015e8864b8b2985f28987dbf, type: 2}

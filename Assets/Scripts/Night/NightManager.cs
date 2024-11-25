@@ -14,7 +14,6 @@ public class NightManager : Frame.SceneManager {
     [SerializeField] private Transform m_playerParent;
     [SerializeField] private GameObject m_chestPrefab;
     [SerializeField] private GameObject m_pathPrefab;
-    [SerializeField] private GameObject m_trapPrefab;
     [SerializeField] private GameObject m_monsterPrefab;
     [SerializeField] private GameObject m_playerPrefab;
     [SerializeField] private GameObject m_shadowPrefab;
@@ -27,7 +26,7 @@ public class NightManager : Frame.SceneManager {
         GenerateMap();
     }
     public override void Load()  {
-        throw new System.NotImplementedException();
+        
     }
     private void Update() {
         if (m_paths.Count == 0 && Input.GetMouseButtonUp(0)) {
@@ -60,7 +59,7 @@ public class NightManager : Frame.SceneManager {
                         InstantiateTile(m_pathPrefab, i, j, parent:m_mapParent);
                         break;
                     case NightMapStateEnum.TRAP:
-                        InstantiateTile(m_trapPrefab, i, j, NightMapStateEnum.TRAP, m_mapParent);
+                        InstantiateTile(m_nightMapChanceSettings.mapConfigure.trapPrefab, i, j, NightMapStateEnum.TRAP, m_mapParent);
                         break;
                     case NightMapStateEnum.MONSTER_A:
                         InstantiateTile(m_monsterPrefab, i, j, NightMapStateEnum.MONSTER_A, m_mapParent);
@@ -81,6 +80,9 @@ public class NightManager : Frame.SceneManager {
             nmo.Position = new Vector2Int(r, c);
         }
         switch (type) {
+            case NightMapStateEnum.CHEST:
+                ((NightChest)nmo).data = Random.Range(0, 2) == 0 ? m_nightMapChanceSettings.mapConfigure.chestDataA : m_nightMapChanceSettings.mapConfigure.chestDataB;
+                break;
             case NightMapStateEnum.MONSTER_A:
                 ((NightMonster)nmo).data = m_nightMapChanceSettings.mapConfigure.monsterDataA;
                 break;
@@ -184,6 +186,53 @@ public class NightManager : Frame.SceneManager {
         }
         return new List<Vector2Int>();
     }
+    public void ShowMap(Vector2Int pos) {
+        ShowShadow(pos.x, pos.y);
+        NightMapStateEnum target = m_map[pos.x, pos.y];
+        switch (target) {
+            case NightMapStateEnum.CHEST: 
+                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+                GetTargetChild(m_mapParent, pos).SetActive(false);
+                MainScene.PlayerState.AddToBackpack(GetTargetChildScript<NightChest>(m_mapParent, pos).data.items);
+                break;
+            case NightMapStateEnum.PATH: 
+                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+                GetTargetChild(m_mapParent, pos).SetActive(false);
+                break;
+            case NightMapStateEnum.MONSTER_A:
+                Battle(pos);
+                break;
+            case NightMapStateEnum.MONSTER_B:
+                Battle(pos);
+                break;
+            case NightMapStateEnum.TRAP:
+                GetTargetChildScript<NightTrap>(m_mapParent, pos).OnPlayerOver();
+                break;
+        }
+    }
+    private void ShowShadow(int r, int c) {
+        m_shadow[r, c] = false;
+        Transform shadow = m_shadowParent.GetChild(r * m_nightMapChanceSettings.MapSize + c);
+        shadow.gameObject.SetActive(false);
+    }
+    private void Battle(Vector2Int pos) {
+        NightMonster monster = GetTargetChildScript<NightMonster>(m_mapParent, pos);
+        NightMonsterData data = monster.data;
+        MainScene.PlayerState.NightHitPoint -= data.Damage;
+        if (MainScene.PlayerState.NightHitPoint <= 0) {
+            Debug.Log("YOU DIE");
+        }
+        MainScene.PlayerState.AddToBackpack(data.Dropping);
+        monster.gameObject.SetActive(false);
+        m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+    }
+    /*从此开始是是基础架构*/
+    private GameObject GetTargetChild(Transform parent, Vector2Int pos) {
+        return parent.GetChild(pos.x * m_nightMapChanceSettings.MapSize + pos.y).gameObject;;
+    }
+    private T GetTargetChildScript<T>(Transform parent, Vector2Int pos) {
+        return GetTargetChild(parent, pos).GetComponent<T>();
+    }
     bool CanGo(Vector2Int pos) {
         int x = pos.x;
         int y = pos.y;
@@ -204,51 +253,5 @@ public class NightManager : Frame.SceneManager {
         }
         return CheckShadow(index.x - 1, index.y) || CheckShadow(index.x + 1, index.y) ||
                CheckShadow(index.x, index.y - 1) || CheckShadow(index.x, index.y + 1);
-    }
-    public void ShowMap(Vector2Int pos) {
-        ShowShadow(pos.x, pos.y);
-        NightMapStateEnum target = m_map[pos.x, pos.y];
-        switch (target) {
-            case NightMapStateEnum.CHEST: 
-                Debug.Log("OPEN CHEST"); 
-                break;
-            /*case NightMapStateEnum.PROP: 
-                Debug.Log("拾取物品");
-                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
-                GetTargetChild(m_mapParent, pos).SetActive(false);
-                MainScene.PlayerState.AddToBackpack(GetTargetChildScript<NightProp>(m_mapParent, pos).data.items);
-                break;*/
-            case NightMapStateEnum.PATH: 
-                // Debug.Log("GO TO THE PATH"); 
-                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
-                GetTargetChild(m_mapParent, pos).SetActive(false);
-                break;
-            /*case NightMapStateEnum.MONSTER:
-                Battle(pos);
-                break;*/
-        }
-    }
-    private void ShowShadow(int r, int c) {
-        m_shadow[r, c] = false;
-        Transform shadow = m_shadowParent.GetChild(r * m_nightMapChanceSettings.MapSize + c);
-        shadow.gameObject.SetActive(false);
-    }
-    private void Battle(Vector2Int pos) {
-        NightMonster monster = GetTargetChildScript<NightMonster>(m_mapParent, pos);
-        NightMonsterData data = monster.data;
-        MainScene.PlayerState.NightHitPoint -= data.Damage;
-        if (MainScene.PlayerState.NightHitPoint <= 0) {
-            Debug.Log("YOU DIE");
-        }
-        MainScene.PlayerState.AddToBackpack(data.Dropping);
-        monster.gameObject.SetActive(false);
-        m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
-    }
-
-    private GameObject GetTargetChild(Transform parent, Vector2Int pos) {
-        return parent.GetChild(pos.x * m_nightMapChanceSettings.MapSize + pos.y).gameObject;;
-    }
-    private T GetTargetChildScript<T>(Transform parent, Vector2Int pos) {
-        return GetTargetChild(parent, pos).GetComponent<T>();
     }
 }

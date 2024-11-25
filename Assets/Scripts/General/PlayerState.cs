@@ -17,9 +17,10 @@ public class PlayerState {
     /// 背包
     /// </summary>
     public Backpack Backpack { get; set; }
+    public const int MAX_NIGHT_HIT_POINTS = 100;
     public PlayerState() {
         DreamEnergy = 0;
-        NightHitPoint = 0;
+        NightHitPoint = MAX_NIGHT_HIT_POINTS;
         EmotionEnergy = 0;
         Backpack = new Backpack();
     }

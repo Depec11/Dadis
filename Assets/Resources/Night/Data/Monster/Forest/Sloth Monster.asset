@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 181d8891a3f78a94a86ae9a24d0f9adf, type: 3}
-  m_Name: Lion
+  m_Name: Sloth Monster
   m_EditorClassIdentifier: 
-  m_animalType: 2
-  m_damage: 20
+  m_animalType: 1
+  m_damage: 15
   m_prefab: {fileID: 0}
   m_dropping:
-  - {fileID: 11400000, guid: 29a88c55585b9174b8e34548160019b0, type: 2}
-  - {fileID: 11400000, guid: 68342561642805c4089fadcf5a40122e, type: 2}
+  - {fileID: 11400000, guid: 62449371e41b7144fae5eae9d41e7669, type: 2}

@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterDataA: {fileID: 11400000, guid: 9a2f26e0c09cd674a9e88bd9b1a1e426, type: 2}
   monsterDataB: {fileID: 11400000, guid: a18120704c853384f9d0add50e027bc6, type: 2}
+  chestDataA: {fileID: 11400000, guid: 1da6956cd54bd864fbb1cf132eb14343, type: 2}
+  chestDataB: {fileID: 11400000, guid: 707b5567754bff148a339c821a0aac2b, type: 2}
+  trapPrefab: {fileID: 4801005417558662996, guid: f64fb7a9d878d944581be6beb06e39be, type: 3}

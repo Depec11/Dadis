@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6328025906215370985}
   - component: {fileID: -8317401495671460144}
-  - component: {fileID: 3824814280380473816}
+  - component: {fileID: -2617128624007418770}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: Forest Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3824814280380473816
+--- !u!114 &-2617128624007418770
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4801005417558662996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f26821d735429458e64d9cbcaf6d1d, type: 3}
+  m_Script: {fileID: 11500000, guid: db8dc09a3c16b344faa1b8405872679b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_state: 2
+  m_state: 0
