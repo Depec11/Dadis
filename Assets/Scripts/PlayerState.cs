@@ -1,9 +1,21 @@
 using UnityEngine;
 
 public class PlayerState {
-    public int NightTimeEnergy { get; set; }
+    /// <summary>
+    /// 梦境能量
+    /// </summary>
+    public int DreamEnergy { get; set; }
+    /// <summary>
+    /// 噩梦抗性
+    /// </summary>
     public int NightDefense { get; set; }
+    /// <summary>
+    /// 情绪能量
+    /// </summary>
     public int EmotionEnergy { get; set; }
+    /// <summary>
+    /// 噩梦结晶
+    /// </summary>
     public int NightmareCrystalline { get; set; }
     public Backpack Backpack { get; set; }
     /// <summary>

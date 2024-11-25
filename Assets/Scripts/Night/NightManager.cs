@@ -4,6 +4,7 @@ using UnityEngine.Serialization;
 public class NightManager : Frame.SceneManager {
     public static NightManager Instance { get; private set; }
     [SerializeField] private NightMapChanceSheet m_nightMapChanceSheet;
+    [SerializeField] private NightMonsterChance m_nightMonsterChance;
     /// <summary>
     ///  [i, j]，i是行，j是列
     /// </summary>
@@ -51,38 +52,46 @@ public class NightManager : Frame.SceneManager {
         for (int i = 0; i < m_nightMapChanceSheet.MapCount; i++) {
             for (int j = 0; j < m_nightMapChanceSheet.MapCount; j++) {
                 m_shadow[i, j] = true;
-                InstantiateTile(m_shadowPrefab , i,j, m_shadowParent);
+                InstantiateTile(m_shadowPrefab , i,j, parent:m_shadowParent);
                 m_map[i, j] = m_nightMapChanceSheet.GetRandomValue(sample);
                 switch (m_map[i, j]) {
                     case NightMapStateEnum.CHEST:
-                        InstantiateTile(m_chestPrefab, i, j, m_mapParent);
+                        InstantiateTile(m_chestPrefab, i, j, NightMapStateEnum.CHEST, m_mapParent);
                         break;
                     case NightMapStateEnum.PROP:
-                        InstantiateTile(m_propPrefab, i, j, m_mapParent);
+                        InstantiateTile(m_propPrefab, i, j, NightMapStateEnum.PROP, m_mapParent);
                         break;
                     case NightMapStateEnum.PATH:
                         paths.Add(new Vector2Int(i, j));
-                        InstantiateTile(m_pathPrefab, i, j, m_mapParent);
+                        InstantiateTile(m_pathPrefab, i, j, parent:m_mapParent);
                         break;
                     case NightMapStateEnum.MONSTER:
-                        InstantiateTile(m_monsterPrefab, i, j, m_mapParent);
+                        InstantiateTile(m_monsterPrefab, i, j, NightMapStateEnum.MONSTER, m_mapParent);
                         break;
                 }
             }
         }
         InstantiatePlayer(paths[Random.Range(0, paths.Count)]);
     }
-    private GameObject InstantiateTile(GameObject go, int r, int c, Transform parent = null) {
+    private GameObject InstantiateTile(GameObject go, int r, int c, NightMapStateEnum type = NightMapStateEnum.SHOWED, Transform parent = null) {
         GameObject instance = Instantiate(go, parent);
         instance.transform.localPosition = new Vector2(c, -r);   // Unity 和 计算机图形学的坐标系不一样，:(
         NightMapObject nmo = instance.GetComponent<NightMapObject>();
         if (nmo) {
             nmo.Position = new Vector2Int(r, c);
         }
+
+        switch (type) {
+            case NightMapStateEnum.CHEST: break;
+            case NightMapStateEnum.PROP: break;
+            case NightMapStateEnum.MONSTER:
+                ((NightMonster)nmo).data = m_nightMonsterChance.RandomValue();
+                break;
+        }
         return instance;
     }
     private void InstantiatePlayer(Vector2Int pos) {
-        Player = InstantiateTile(m_playerPrefab, pos.x, pos.y, m_playerParent).GetComponent<NightPlayerObject>();
+        Player = InstantiateTile(m_playerPrefab, pos.x, pos.y, parent: m_playerParent).GetComponent<NightPlayerObject>();
         Player.Position = pos;
         ShowMap(pos);
     }
@@ -102,22 +111,7 @@ public class NightManager : Frame.SceneManager {
         if (index == Player.Position) {
             return;
         }
-        NightMapStateEnum target = m_map[index.x, index.y];
         m_paths = GoTo(index);
-        switch (target) {
-            case NightMapStateEnum.CHEST: 
-                Debug.Log("OPEN CHEST"); 
-                break;
-            case NightMapStateEnum.PROP: 
-                Debug.Log("PICK UP THE PROP"); 
-                break;
-            case NightMapStateEnum.PATH: 
-                Debug.Log("GO TO THE PATH"); 
-                break;
-            case NightMapStateEnum.MONSTER: 
-                Debug.Log("YOU SHOULD DEFEAT THE MONSTER"); 
-                break;
-        }
     }
     private void Move() {
         Vector3 target = new Vector3(m_paths[0].y, -m_paths[0].x, Player.transform.position.z);
@@ -157,6 +151,10 @@ public class NightManager : Frame.SceneManager {
             Vector2Int current = currList[^1];
             if (current == target) {
                 return currList;    
+            } else {
+                if (m_shadow[current.x, current.y]) {
+                    continue;
+                }
             }
             MarkVisited(current);
             Vector2Int left = new Vector2Int(current.x - 1, current.y);
@@ -198,14 +196,34 @@ public class NightManager : Frame.SceneManager {
         return x >= 0 && y >= 0  && x < m_nightMapChanceSheet.MapCount && y < m_nightMapChanceSheet.MapCount;
     }
     private bool CheckShadow(int x, int y) {
-        return InMap(x, y) && m_shadow[x, y];
+        return InMap(x, y) && !m_shadow[x, y];
     }
     private bool CanGoAsShadow(Vector2Int index) {
+        if (CheckShadow(index.x, index.y)) {
+            return true;
+        }
         return CheckShadow(index.x - 1, index.y) || CheckShadow(index.x + 1, index.y) ||
-            CheckShadow(index.x, index.y - 1) || CheckShadow(index.x, index.y + 1);
+               CheckShadow(index.x, index.y - 1) || CheckShadow(index.x, index.y + 1);
     }
     public void ShowMap(Vector2Int pos) {
         ShowShadow(pos.x, pos.y);
+        NightMapStateEnum target = m_map[pos.x, pos.y];
+        switch (target) {
+            case NightMapStateEnum.CHEST: 
+                Debug.Log("OPEN CHEST"); 
+                break;
+            case NightMapStateEnum.PROP: 
+                Debug.Log("PICK UP THE PROP"); 
+                break;
+            case NightMapStateEnum.PATH: 
+                // Debug.Log("GO TO THE PATH"); 
+                m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+                GetTargetChild(m_mapParent, pos).SetActive(false);
+                break;
+            case NightMapStateEnum.MONSTER:
+                Battle(pos);
+                break;
+        }
         /*if (InMap(pos.x - 1, pos.y)) {
             ShowShadow(pos.x - 1, pos.y);
         }
@@ -235,5 +253,21 @@ public class NightManager : Frame.SceneManager {
         m_shadow[r, c] = false;
         Transform shadow = m_shadowParent.GetChild(r * m_nightMapChanceSheet.MapCount + c);
         shadow.gameObject.SetActive(false);
+    }
+    private void Battle(Vector2Int pos) {
+        Debug.Log("BATTLE, 假设战胜了！！！");
+        NightMonster monster = GetTargetChildScript<NightMonster>(m_mapParent, pos);
+        NightMonsterData data = monster.data;
+        MainScene.PlayerState.DreamEnergy -= data.Damage;
+        MainScene.PlayerState.NightmareCrystalline += data.NightmareCrystalline;
+        monster.gameObject.SetActive(false);
+        m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
+    }
+
+    private GameObject GetTargetChild(Transform parent, Vector2Int pos) {
+        return parent.GetChild(pos.x * m_nightMapChanceSheet.MapCount + pos.y).gameObject;;
+    }
+    private T GetTargetChildScript<T>(Transform parent, Vector2Int pos) {
+        return GetTargetChild(parent, pos).GetComponent<T>();
     }
 }
