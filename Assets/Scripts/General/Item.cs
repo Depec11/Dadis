@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
-
 /// <summary>
 /// 物品，继承自物体
 /// </summary>
-public abstract class Item { 
+[CreateAssetMenu(menuName = ("Data/Item"), fileName = ("Item_"))]
+[Serializable] public class Item : ScriptableObject { 
     /// <summary>
     /// 数量
     /// </summary>
@@ -28,19 +28,11 @@ public abstract class Item {
     /// <summary>
     /// 最大堆叠数，-1为正无穷
     /// </summary>
-    private int m_maxCount;
+    public int maxCount;
     /// <summary>
     /// 名称
     /// </summary>
-    protected string m_name = "DefaultItem";
-    /// <summary>
-    /// 名称
-    /// </summary>
-    public string Name => m_name;
-    /// <summary>
-    /// 最大堆叠数
-    /// </summary>
-    public int MaxCount => m_maxCount;
+    public string name = "DefaultItem";
     /// <summary>
     /// 初始化
     /// </summary>
@@ -54,9 +46,9 @@ public abstract class Item {
         level = l;
         count = c;
         duration = d;
-        m_maxCount = mc;
+        maxCount = mc;
         type = t;
-        m_name = n;
+        name = n;
         if (duration == -1) {
             unbrokenable = true;
         }
@@ -74,7 +66,7 @@ public abstract class Item {
         if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null)) {
             return false;
         }
-        return i1.Name == i2.Name && i1.level == i2.level && i1.duration == i2.duration;
+        return i1.name == i2.name && i1.level == i2.level && i1.duration == i2.duration;
     }
     /// <summary>
     /// 重载不等于判断
@@ -105,7 +97,7 @@ public abstract class Item {
     /// </summary>
     /// <returns>转化后的字符串</returns>
     public override string ToString() {
-        return m_name;
+        return name;
     }
     /// <summary>
     /// 获取描述

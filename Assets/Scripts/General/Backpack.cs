@@ -17,10 +17,10 @@ public class Backpack {
     public void Add(Item t) {
         for (int i = 0; i < items.Count; i++) {
             if (t == items[i]) {
-                if (items[i].MaxCount == -1) {
+                if (items[i].maxCount == -1) {
                     items[i].count += t.count;
                     return;
-                } else if (items[i].MaxCount == items.Count) {
+                } else if (items[i].maxCount == items.Count) {
                     break;
                 }
             }
@@ -91,7 +91,7 @@ public class Backpack {
     /// <returns>是否具有</returns>
     public bool Seacrch(string name, int level, int count) {
         foreach (Item it in items) {
-            if (it.Name == name && it.level == level && it.count >= count) {
+            if (it.name == name && it.level == level && it.count >= count) {
                 return true;
             }
         }

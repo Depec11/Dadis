@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181d8891a3f78a94a86ae9a24d0f9adf, type: 3}
+  m_Name: Flower
+  m_EditorClassIdentifier: 
+  m_name: "\u82B1\u5996"
+  m_damage: 50
+  m_nightmareCrystalline: 10
+  m_prefab: {fileID: 0}
+  m_droppingType: 2
+  m_dropping: {fileID: 11400000, guid: 868451442f661e240a57dd8141b39985, type: 2}
