@@ -260,6 +260,7 @@ public class NightManager : Frame.SceneManager {
         NightMonsterData data = monster.data;
         MainScene.PlayerState.DreamEnergy -= data.Damage;
         MainScene.PlayerState.NightmareCrystalline += data.NightmareCrystalline;
+        MainScene.PlayerState.AddToBackpack(data.Dropping);
         monster.gameObject.SetActive(false);
         m_map[pos.x, pos.y] = NightMapStateEnum.SHOWED;
     }

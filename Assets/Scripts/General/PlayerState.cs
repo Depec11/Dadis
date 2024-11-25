@@ -17,7 +17,17 @@ public class PlayerState {
     /// 噩梦结晶
     /// </summary>
     public int NightmareCrystalline { get; set; }
+    /// <summary>
+    /// 背包
+    /// </summary>
     public Backpack Backpack { get; set; }
+    public PlayerState() {
+        DreamEnergy = 0;
+        NightDefense = 0;
+        EmotionEnergy = 0;
+        NightmareCrystalline = 0;
+        Backpack = new Backpack();
+    }
     /// <summary>
     /// 添加到背包
     /// </summary>

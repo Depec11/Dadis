@@ -15,3 +15,5 @@ MonoBehaviour:
   m_name: "\u8759\u8760"
   m_damage: 30
   m_nightmareCrystalline: 5
+  m_prefab: {fileID: 0}
+  m_droppingType: 1

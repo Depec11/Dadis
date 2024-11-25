@@ -15,3 +15,5 @@ MonoBehaviour:
   m_name: "\u68EE\u6797\u4E4B\u738B"
   m_damage: 200
   m_nightmareCrystalline: 50
+  m_prefab: {fileID: 0}
+  m_droppingType: 4

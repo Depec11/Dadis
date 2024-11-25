@@ -16,7 +16,7 @@ public abstract class Item {
     /// <summary>
     /// 类型
     /// </summary>
-    public Flag.ItemType type = Flag.ItemType.Default;
+    public Flag.ItemType type = Flag.ItemType.DEFAULT;
     /// <summary>
     /// 是否可以被消耗耐久
     /// </summary>
@@ -50,14 +50,16 @@ public abstract class Item {
     /// <param name="mc">最大堆叠数</param>
     /// <param name="t">类型</param>
     /// <param name="n">名称</param>
-    public Item(int l, int c, int d, int mc, Flag.ItemType t = Flag.ItemType.Default, string n = "DefaultItem") {
+    public Item(int l, int c, int d, int mc, Flag.ItemType t = Flag.ItemType.DEFAULT, string n = "DefaultItem") {
         level = l;
         count = c;
         duration = d;
         m_maxCount = mc;
         type = t;
         m_name = n;
-        if (duration == -1) unbrokenable = true;
+        if (duration == -1) {
+            unbrokenable = true;
+        }
     }
     /// <summary>
     /// 重载等于判断
@@ -66,8 +68,12 @@ public abstract class Item {
     /// <param name="i2">物品2</param>
     /// <returns>是否相等</returns>
     public static bool operator ==(Item i1, Item i2) {
-        if (ReferenceEquals(i1, null) && ReferenceEquals(i2, null)) return true;
-        if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null)) return false;
+        if (ReferenceEquals(i1, null) && ReferenceEquals(i2, null)) {
+            return true;
+        }
+        if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null)) {
+            return false;
+        }
         return i1.Name == i2.Name && i1.level == i2.level && i1.duration == i2.duration;
     }
     /// <summary>
@@ -102,23 +108,11 @@ public abstract class Item {
         return m_name;
     }
     /// <summary>
-    /// 设置图片
-    /// </summary>
-    /// <param name="picture">图片渲染器的图片容器</param>
-    public abstract Sprite Picture();
-    /// <summary>
     /// 获取描述
     /// </summary>
     /// <returns>描述</returns>
     public virtual string GetDesc() {
         return "";
-    }
-    /// <summary>
-    /// 判断是否能在背包UI中显示交互按钮
-    /// </summary>
-    /// <returns>能否显示</returns>
-    public virtual bool CanShowInteractiveButton() {
-        return false;
     }
 #if DEBUG
     /// <summary>
