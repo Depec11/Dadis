@@ -7,6 +7,10 @@ public class MainScene : MonoBehaviour {
     public static MainScene Instance { get; private set; }
     public static Camera MainCamera { get; private set; }
     /// <summary>
+    /// 全局的玩家状态，包括血量、攻击、防具、装备、金钱等、收集的合成表。
+    /// </summary>
+    public static PlayerState PlayerState { get; private set; }
+    /// <summary>
     /// 白天场景
     /// </summary>
     [SerializeField] private GameObject m_dayScenes;
@@ -17,6 +21,7 @@ public class MainScene : MonoBehaviour {
     private void Awake() {
         Instance = this;
         MainCamera = Camera.main;
+        PlayerState = new PlayerState(); 
         GenerateNightScene();
     }
     /// <summary>
