@@ -9,16 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: SHULAN B B
+  m_Script: {fileID: 11500000, guid: 4a10e730333144d4397d9c908bcf16fd, type: 3}
+  m_Name: ForestNightMapSettings
   m_EditorClassIdentifier: 
-  uid: 101
-  count: 1
-  level: 1
-  type: 5
-  unbrokenable: 1
-  duration: -1
-  maxCount: 999
-  name: "\u68C9\u82B1\u4E91\u83C7"
-  description: 
-  icon: {fileID: 0}
+  pairList:
+  - first: 0.1
+    second: 2
+  - first: 0.2
+    second: 1
+  - first: 0.3
+    second: 3
+  - first: 0.2
+    second: 4
+  - first: 0.2
+    second: 5
+  m_MapSize: 10

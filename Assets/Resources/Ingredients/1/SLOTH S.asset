@@ -9,7 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f522d996f3d1941b01f6f6efc7fed9, type: 3}
-  m_Name: ForestNormalChest
+  m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
+  m_Name: SLOTH S
   m_EditorClassIdentifier: 
-  m_Items: []
+  uid: 102
+  count: 1
+  level: 1
+  type: 6
+  unbrokenable: 1
+  duration: -1
+  maxCount: 999
+  name: "\u6162\u65F6\u8349"
+  description: 
+  icon: {fileID: 0}

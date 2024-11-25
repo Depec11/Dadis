@@ -9,18 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a10e730333144d4397d9c908bcf16fd, type: 3}
-  m_Name: ForestNightMapConfig
+  m_Script: {fileID: 11500000, guid: 31c0e6a55679ecf4d8fc12cc7d89a664, type: 3}
+  m_Name: Forest
   m_EditorClassIdentifier: 
-  pairList:
-  - first: 0.1
-    second: 2
-  - first: 0.2
-    second: 1
-  - first: 0.3
-    second: 3
-  - first: 0.2
-    second: 4
-  - first: 0.2
-    second: 5
-  m_MapSize: 10
+  monsterDataA: {fileID: 11400000, guid: 9a2f26e0c09cd674a9e88bd9b1a1e426, type: 2}
+  monsterDataB: {fileID: 11400000, guid: a18120704c853384f9d0add50e027bc6, type: 2}

@@ -14,10 +14,6 @@ public class PlayerState {
     /// </summary>
     public int EmotionEnergy { get; set; }
     /// <summary>
-    /// 噩梦结晶
-    /// </summary>
-    public int NightmareCrystalline { get; set; }
-    /// <summary>
     /// 背包
     /// </summary>
     public Backpack Backpack { get; set; }
@@ -25,7 +21,6 @@ public class PlayerState {
         DreamEnergy = 0;
         NightHitPoint = 0;
         EmotionEnergy = 0;
-        NightmareCrystalline = 0;
         Backpack = new Backpack();
     }
     /// <summary>

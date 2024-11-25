@@ -28,4 +28,16 @@ namespace Flag {
         /// </summary>
         SPECIAL_FLAVER = 0x6,
     }
+
+    public enum AnimalType {
+        // FOREST
+        /// <summary>
+        /// 树懒
+        /// </summary>
+        SLOTH = 0x01,
+        /// <summary>
+        /// 狮子
+        /// </summary>
+        LOIN = 0x02,
+    }
 }

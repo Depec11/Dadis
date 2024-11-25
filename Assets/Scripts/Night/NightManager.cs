@@ -4,9 +4,6 @@ using UnityEngine.Serialization;
 public class NightManager : Frame.SceneManager {
     public static NightManager Instance { get; private set; }
     [SerializeField] private NightMapChanceSheet m_nightMapChanceSheet;
-    [SerializeField] private NightMonsterChanceSheet m_NightMonsterChanceSheet;
-    [SerializeField] private NightChestChanceSheet m_NightChestChanceSheet;
-    // [SerializeField] private NightPropChanceSheet m_NightPropChanceSheet;
     /// <summary>
     ///  [i, j]，i是行，j是列
     /// </summary>
@@ -83,11 +80,8 @@ public class NightManager : Frame.SceneManager {
         if (nmo) {
             nmo.Position = new Vector2Int(r, c);
         }
-
         switch (type) {
-            case NightMapStateEnum.CHEST:
-                ((NightChest)nmo).data = m_NightChestChanceSheet.RandomValue();
-                break;
+            
         }
         return instance;
     }

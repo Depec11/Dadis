@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebab2afcedc377341a4705a5e71da744, type: 3}
-  m_Name: SHULAN B A
+  m_Script: {fileID: 11500000, guid: 181d8891a3f78a94a86ae9a24d0f9adf, type: 3}
+  m_Name: Sloth
   m_EditorClassIdentifier: 
-  uid: 100
-  count: 1
-  level: 1
-  type: 5
-  unbrokenable: 1
-  duration: -1
-  maxCount: 999
-  name: "\u7761\u7720\u9C7C\u9AA8"
-  description: 
-  icon: {fileID: 0}
+  m_animalType: 1
+  m_damage: 0
+  m_prefab: {fileID: 0}
+  m_dropping:
+  - {fileID: 11400000, guid: 62449371e41b7144fae5eae9d41e7669, type: 2}
